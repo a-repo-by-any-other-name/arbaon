@@ -23,8 +23,8 @@ jobs:
           curl -L \
             -X PATCH \
             -H "Accept: application/vnd.github+json" \
-            -H "Authorization: Bearer ${NUCLEAR_BUTTON}" \
+            -H "Authorization: Bearer ${GHA_BEARER_TOKEN}" \
             ${API_URL} \
             -d '{"name": "'${NEW_NAME}'"}'
         env:
-          NUCLEAR_BUTTON: ${{ secrets.NUCLEAR_BUTTON }}
+          GHA_BEARER_TOKEN: ${{ secrets.GHA_BEARER_TOKEN }}
