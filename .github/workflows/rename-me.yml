@@ -17,7 +17,7 @@ jobs:
         run: |
           export CURRENT_NAME=$(echo ${{ github.repository }} | cut -d '/' -f 2)
           export NEW_SUFFIX=$(date -Is | sha256sum | head -c 6)
-          export NEW_NAME="catchme-${NEW_SUFFIX}"
+          export NEW_NAME="arbaon-${NEW_SUFFIX}"
           export API_URL="${{ github.api_url }}/repos/${{ github.repository }}"
           echo "Renaming this repo from ${CURRENT_NAME} to ${NEW_NAME} (at ${API_URL})"
           curl -L \
