@@ -1,0 +1,3 @@
+# 🌹 A Repo By Any Other Name...
+
+This is an extremely useless repository that is hard to find. It has an action which renames itself (this repository), regularly and automatically.
