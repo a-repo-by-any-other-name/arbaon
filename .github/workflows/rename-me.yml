@@ -1,0 +1,30 @@
+name: Rename me
+
+on:
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+
+  schedule:
+    # Run every day, every hour, at quarter-past-the-hour
+    - cron:  '15 * * * *'
+
+jobs:
+  rename:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Rename this repo
+        run: |
+          export CURRENT_NAME=$(echo ${{ github.repository }} | cut -d '/' -f 2)
+          export NEW_SUFFIX=$(date -Is | sha256sum | head -c 6)
+          export NEW_NAME="catchme-${NEW_SUFFIX}"
+          export API_URL="${{ github.api_url }}/repos/${{ github.repository }}"
+          echo "Renaming this repo from ${CURRENT_NAME} to ${NEW_NAME} (at ${API_URL})"
+          curl -L \
+            -X PATCH \
+            -H "Accept: application/vnd.github+json" \
+            -H "Authorization: Bearer ${NUCLEAR_BUTTON}" \
+            ${API_URL} \
+            -d '{"name": "'${NEW_NAME}'"}'
+        env:
+          NUCLEAR_BUTTON: ${{ secrets.NUCLEAR_BUTTON }}
